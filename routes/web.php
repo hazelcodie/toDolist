@@ -21,4 +21,19 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', [TodoController::class,'index'])
 ->name('todolist.index');
 
+Route::get('/todo', function(){
+    return view('todo');
+})->name('todolist.todo');
+
+Route::get('/goals', function(){
+    return view('goals');
+})->name('todolist.goals');
+
+Route::get('/notes', function(){
+    return view('notes');
+})->name('todolist.notes');
+
+Route::get('/todo/create',[TodoController::class, 'create'])
+->name('todolist.create');
+
 require __DIR__.'/auth.php';

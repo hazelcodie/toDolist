@@ -7,7 +7,7 @@
              ready to be productive?
             </p>
             <img src="{{ asset('images/welcomeimage.png') }}" alt="characterone" class="w-24 mx-auto mt-5 mb-1 animate-bounce">
-            <a href="{{ route('todolist.index') }}" class="bg-purple-500 text-white px-10 py-2 rounded-lg shadow-md font-medium transition-all hover:bg-purple-600 font-mono">
+            <a href="{{ route('home') }}" class="bg-purple-500 text-white px-10 py-2 rounded-lg shadow-md font-medium transition-all hover:bg-purple-600 font-mono">
                 Definitely!
             </a>
         </div>

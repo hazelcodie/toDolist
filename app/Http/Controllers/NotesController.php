@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
+use App\Models\Notes;
 use Illuminate\Http\Request;
 
-class TodoController extends Controller
+class NotesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $todos = Todo::all();
-        return view('todolist.index', compact('todos'));
+        //
     }
 
     /**
@@ -21,7 +20,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-       return view('todolist.create');
+        //
     }
 
     /**
@@ -29,23 +28,13 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' =>'required|max:225',
-            'description'=>'required',
-        ]);
-
-        Todo::create([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
-
-        return redirect()->route('todolist.index')->with('success','To-Do created successfully!');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Todo $todo)
+    public function show(Notes $notes)
     {
         //
     }
@@ -53,7 +42,7 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Todo $todo)
+    public function edit(Notes $notes)
     {
         //
     }
@@ -61,7 +50,7 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Notes $notes)
     {
         //
     }
@@ -69,7 +58,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy(Notes $notes)
     {
         //
     }

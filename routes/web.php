@@ -18,12 +18,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home', [TodoController::class,'index'])
+Route::get('/tasks', [TodoController::class,'index'])
 ->name('todolist.index');
 
-Route::get('/todo', function(){
-    return view('todo');
-})->name('todolist.todo');
+Route::get('/home', function(){
+    return view('home');
+})->name('home');
 
 Route::get('/goals', function(){
     return view('goals');
@@ -35,5 +35,8 @@ Route::get('/notes', function(){
 
 Route::get('/todo/create',[TodoController::class, 'create'])
 ->name('todolist.create');
+
+Route::post('/todo', [TodoController::class, 'store'])
+->name('todolist.store');
 
 require __DIR__.'/auth.php';

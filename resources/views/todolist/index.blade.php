@@ -1,31 +1,33 @@
-<!-- Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead -->
 @extends('layouts.app')
 
 @section('content')
-    <div class="relative bg-pink-200 p-6 rounded-2xl shadow-lg w-80 text-center">
-        <!-- Character Icon -->
-        <img src="{{ asset('images/welcomeimage.png') }}" alt="Character" class="absolute -top-10 left-1 w-20 h-20">
-
-        <!-- Buttons -->
-        <div class="space-y-4 mt-4 ">
-            <a href="{{ route('todolist.todo') }}" class="w-full">
-                <button
-                    class="w-full bg-purple-500 text-white py-2 rounded-lg shadow-md font-medium transition-all hover:bg-purple-600 font-mono mb-4">
-                    To-do
-                </button>
-            </a>
-            <a href="{{ route('todolist.goals') }}" class="w-full">
-                <button
-                    class="w-full bg-purple-500 text-white py-2 rounded-lg shadow-md font-medium transition-all hover:bg-purple-600 font-mono mb-4">
-                    My goals
-                </button>
-            </a>
-            <a href="{{ route('todolist.notes') }}" class="w-full">
-                <button
-                    class="w-full bg-purple-500 text-white py-2 rounded-lg shadow-md font-medium transition-all hover:bg-purple-600 font-mono">
-                    Notes
-                </button>
-            </a>
+    <div class="min-h-screen flex items-center justify-center bg-purple-300 p-6">
+        <div class="relative w-full max-w-lg">
+            {{-- Speech Bubble --}}
+            <div class="relative flex items-start space-x-2">
+                <img src="{{ asset('images/homeimage.png') }}" alt="Character" class="w-20 h-20 relative -top-2">
+                <div class="bg-white text-gray-800 p-4 rounded-lg shadow  text-center border border-solid ">
+                    You go, get that lists done!
+                </div>
+            </div>
+            {{-- Task List Area --}}
+            <div class="bg-purple-200 rounded-2xl p-6 shadow-lg w-[400px] h-[400px] relative">
+                <div class="min-h-[200px] overflow-y-auto">
+                    {{-- Tasks will be displayed here --}}
+                    @foreach ($todos as $todo)
+                        <div class="bg-white p-4 rounded-lg shadow mb-4">
+                            <h3 class="font-bold text-lg">{{ $todo->title }}</h3>
+                            <p>{{ $todo->description }}</p>
+                        </div>
+                    @endforeach
+                </div>
+                <a href="{{ route('todolist.create') }}" class="absolute bottom-4 right-4">
+                    <button
+                        class="mt-4 px-4 py-2 bg-white text-gray-800 rounded-md shadow transition duration-300 hover:bg-purple-300 hover:shadow-lg">
+                        Add new task
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 @endsection

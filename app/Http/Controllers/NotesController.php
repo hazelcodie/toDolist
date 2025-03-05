@@ -12,7 +12,8 @@ class NotesController extends Controller
      */
     public function index()
     {
-        //
+        $notes = Notes::all();
+        return view('notes.index', compact('notes'));
     }
 
     /**
@@ -20,7 +21,7 @@ class NotesController extends Controller
      */
     public function create()
     {
-        //
+        return view ('notes.create');
     }
 
     /**
@@ -28,7 +29,17 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' =>'required|max:225',
+            'description'=>'required',
+        ]);
+
+        Notes::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('notes.index')->with('success','Notes created successfully!');
     }
 
     /**

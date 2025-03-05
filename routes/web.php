@@ -40,3 +40,5 @@ Route::post('/todo', [TodoController::class, 'store'])
 ->name('todolist.store');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/goals.php';
+require __DIR__.'/notes.php';

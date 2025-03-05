@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="bg-pink-200 p-6 rounded-3xl shadow-lg w-[500px]">
+    <div class="bg-purple-100 p-6 rounded-3xl shadow-lg w-[500px]">
         <h2 class="text-center text-lg font-semibold text-gray-800 mb-4">
             Create New To Do
         </h2>

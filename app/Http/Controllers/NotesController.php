@@ -55,7 +55,7 @@ class NotesController extends Controller
      */
     public function edit(Notes $notes)
     {
-        //
+        
     }
 
     /**

@@ -12,7 +12,10 @@
 
             {{-- Title and Add Button --}}
             <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <x-heroicon-s-book-open class="w-8 h-8 mr-2" />
                 <h2 class="text-lg font-bold text-gray-900">TASKS</h2>
+                </div>
                 <a href="{{ route('todolist.create') }}">
                     <button
                         class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-900 hover:bg-gray-900 hover:text-white transition">

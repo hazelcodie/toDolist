@@ -18,9 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/tasks', [TodoController::class,'index'])
-->name('todolist.index');
-
 Route::get('/home', function(){
     return view('home');
 })->name('home');
@@ -33,12 +30,8 @@ Route::get('/notes', function(){
     return view('notes');
 })->name('todolist.notes');
 
-Route::get('/todo/create',[TodoController::class, 'create'])
-->name('todolist.create');
-
-Route::post('/todo', [TodoController::class, 'store'])
-->name('todolist.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/goals.php';
 require __DIR__.'/notes.php';
+require __DIR__.'/todo.php';

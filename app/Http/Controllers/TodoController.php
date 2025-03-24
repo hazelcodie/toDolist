@@ -55,7 +55,7 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
-        //
+        return view('todolist.edit', compact('todo'));
     }
 
     /**
@@ -63,7 +63,17 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        $request->validate([
+            'title' =>'required|max:225',
+            'description'=>'required',
+        ]);
+
+        $todo->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('todolist.index')->with('success','To-Do updated successfully!');
     }
 
     /**

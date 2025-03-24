@@ -28,11 +28,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
                 @foreach ($notes as $note)
                     <div onclick="openModal('{{ $note->title }}', '{{ $note->description }}', '{{ $note->created_at->format('F d, Y') }}')"
-                        class="w-64 h-64 p-4 rounded-xl shadow-md bg-purple-200 flex flex-col justify-between transition duration-300 transform hover:scale-105 hover:shadow-lg hover:bg-purple-100">
-            
+                        class="w-64 h-64 p-4 rounded-xl shadow-md bg-purple-200 flex flex-col justify-between transition duration-300 transform hover:scale-105 hover:shadow-lg hover:bg-purple-100 overflow-hidden">
+
                         <div class="flex justify-between items-center relative">
-                            <h3 class="font-bold text-gray-900">{{ $note->title }}</h3>
-                            <button onclick="toggleIcons(event, this)"
+                            <h3 class="font-bold text-gray-900 trunacate w-4/5">{{ $note->title }}</h3>
+                            <button onclick="toggleIcons(event, this)" 
                                 class="text-gray-500 hover:text-gray-700 focus:outline-none">
                                 <x-heroicon-o-ellipsis-horizontal class="w-6 h-6" />
                             </button>
@@ -45,18 +45,19 @@
                                     </button>
                                 </a>
                                 <form action="{{ route('notes.destroy', $note->id) }}" method="POST"
-                                    onclick="event.stopPropagation()">
+                                    id="delete-form-{{ $note->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                        class="flex items-center text-red-500 hover:text-red-700 w-full mt-1">
+                                    <button type="button"
+                                        class="flex items-center text-red-500 hover:text-red-700 w-full mt-1 rounded-lg"
+                                        onclick= " event.stopPropagation(); confirmDelete({{ $note->id }}, '{{ $note->title }}')">
                                         <x-heroicon-o-trash class="w-5 h-5 mr-2" />
                                         Delete
                                     </button>
-                                </form>
+                                </form> 
                             </div>
                         </div>
-                        <p class="text-gray-700 text-sm flex-grow flex items-center">{{ $note->description }}</p>
+                        <p class="text-gray-700 text-sm flex-grow overflow-hidden  text line-clamp-4 items-center">{{ $note->description }}</p>
                         <p class="text-xs text-gray-600 mt-2 ">{{ $note->created_at->format('F d, Y') }}</p>
                     </div>
                 @endforeach
@@ -76,6 +77,32 @@
     </div>
 
     <script>
+        function confirmDelete(id, title) {
+            Swal.fire({
+                title: '<span class="text-lg font-bold text-gray-900">Delete Note</span>',
+                html: `<p class="text-gray-700 text-sm mt-2">
+                        You are about to delete the <span class="font-semibold">{{ $note->title }}</span> note.<br>
+                        Do you wish to continue?
+                    </p>`,
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true, // Swaps button positions beacuse by default, SweetAlert2 places the confirm button (Delete) on the left
+                customClass: {
+                    popup: 'bg-pink-200 rounded-2xl p-6 shadow-xl',
+                    title: 'text-gray-900 font-bold',
+                    confirmButton: 'bg-red-500 text-white rounded-full px-6 py-2  hover:bg-red-600 focus:ring-2 focus:ring-red-300',
+                    cancelButton: 'bg-white text-gray-600 border border-gray-300 mr-10 rounded-full px-6 py-2 hover:bg-gray-100 focus:ring-2 focus:ring-gray-300',
+                },
+                buttonsStyling: false, // Allows Tailwind classes to take effect
+                iconColor: '#f87171', // Tailwind red-400 for the warning icon
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+
         document.getElementById("search").addEventListener("input", function() {
             let searchValue = this.value.toLowerCase();
             let cards = document.querySelectorAll(".grid div");
